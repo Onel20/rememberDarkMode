@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const body = document.querySelector("body");
+            const darkModeIcon = document.querySelector(".dark-mode-icon");
+            const storedMode = localStorage.getItem('darkMode');
+
+            if (storedMode === 'dark') {
+                enableDarkMode();
+            }
+
+            document.querySelector(".btn").addEventListener('click', ()  => {
+                if (body.classList.contains('dark')) {
+                    disableDarkMode();
+                } else {
+                    enableDarkMode();
+                }
+            });
+
+            function enableDarkMode() {
+                body.classList.add('dark');
+                darkModeIcon.classList.add('dark');
+                localStorage.setItem('darkMode', 'dark');
+            }
+
+            function disableDarkMode() {
+                body.classList.remove('dark');
+                darkModeIcon.classList.remove('dark');
+                localStorage.setItem('darkMode', 'light');
+            }
+        })
+    </script>
+    <style>
+        body {
+            transition: background-color 1s ease;
+        }
+        .btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 25px;
+            background-color: white;
+            border: 2px solid gray;
+            text-align: center;
+            line-height: 50px;
+            cursor: pointer;
+        }
+        .btn span {
+            font-size: 24px;
+        }
+        .btn:hover {
+            display: block;
+            background-color: black;
+        }
+        .dark {
+            color: whitesmoke;
+            background-color: black;
+            transition: background-color 1s ease;
+        }
+
+        .btn span.dark-mode-icon::after {
+            content: "🌛";
+        }
+        .btn span.dark-mode-icon.dark::after {
+            content: "☀️";
+            background-color: white;
+        }
+
+        .dark .btn:hover { 
+            background-color: white;
+        }
+    </style>
+    <title>Dark Mode</title>
+</head>
+<body>
+    <div class="btn">
+        <span class="dark-mode-icon"></span>
+    </div>
+    <h1>Hello</h1>
+</body>
+</html>
